@@ -1,0 +1,16 @@
+# Credentials
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Claudify local
+CLAUDE.local.md
+.claude/logs/
+.claude/agent-memory/
+.claude/backups/
+
+# Common
+.DS_Store
+Thumbs.db
+*.log
