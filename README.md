@@ -9,13 +9,29 @@ Examples:
 - Spinner: `Fucking...`, `Pegging...`, `Deepthroating...`
 - Statusline: `Fucking your mom...`, `Counting the toys in your ass...`, `Spitroasting the sprint...`
 
-## Install (this project)
+## Install
 
-Already wired up via `.claude/settings.json`. Start a new Claude Code session and both surfaces will be live.
+```bash
+git clone https://github.com/code-418dotcom/claudezak.git
+cd claudezak
+./install.sh              # user-wide → ~/.claude/settings.json
+./install.sh --project /path/to/repo   # project-scoped
+./install.sh --uninstall  # remove (add --project for project scope)
+./install.sh --dry-run    # preview the merged settings.json
+```
 
-## Install (any other project or user-wide)
+The installer:
 
-Copy the config and script into your target.
+- merges `spinnerVerbs` and `statusLine` into the target `settings.json` via `jq` (other settings are preserved);
+- copies `bin/claudezak-status.sh` to `~/.claude/bin/` (user) or `<project>/bin/` (project), `chmod +x`;
+- backs up `settings.json` as `settings.json.bak.<timestamp>` before any change;
+- is safe to re-run.
+
+Requires `jq` on PATH. Restart Claude Code after install.
+
+### Manual install
+
+If you'd rather not run the script:
 
 **1. Spinner verbs** — add to `.claude/settings.json` (project) or `~/.claude/settings.json` (user-wide):
 
@@ -30,7 +46,7 @@ Copy the config and script into your target.
 
 `mode: "replace"` uses only your verbs. `mode: "append"` mixes them with the defaults. Copy the full verb list from this project's `.claude/settings.json`.
 
-**2. Statusline** — copy `bin/claudezak-status.sh` somewhere stable (e.g. `~/bin/`), `chmod +x` it, then:
+**2. Statusline** — copy `bin/claudezak-status.sh` somewhere stable (e.g. `~/.claude/bin/`), `chmod +x` it, then:
 
 ```json
 {
